@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Movies Empari</string>
+    <string name="search">Search</string>
+    <string name="error_request">Ocorreu um erro, tente novamente!</string>
+    <string name="populares">Populares</string>
+    <string name="maisvotados">Mais votados</string>
+    <string name="minhasavaliacoes">Minhas Avaliações</string>
+    <string name="ok">OK</string>
+    <string name="titulooriginal">Título Original</string>
+    <string name="lancamento">Lançamento</string>
+    <string name="idiomaoriginal">Idioma Original</string>
+    <string name="duracao">Duração</string>
+    <string name="orcamento">Orçamento</string>
+    <string name="receita">Receita</string>
+    <string name="generos">Gêneros</string>
+    <string name="avaliacaoatualizadasucesso">Avaliação atualizada com sucesso!</string>
+    <string name="avaliacaofeitasucesso">Avaliação feita com sucesso!</string>
+</resources>

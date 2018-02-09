@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_popular"
+        android:icon="@drawable/ic_star"
+        android:title="@string/populares" />
+
+    <item
+        android:id="@+id/navigation_toprated"
+        android:icon="@drawable/ic_star"
+        android:title="@string/maisvotados" />
+
+    <item
+        android:id="@+id/navigation_myratings"
+        android:icon="@drawable/ic_star"
+        android:title="@string/minhasavaliacoes" />
+
+</menu>
