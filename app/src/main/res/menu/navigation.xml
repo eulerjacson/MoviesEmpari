@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_popular"
-        android:icon="@drawable/ic_star"
+        android:icon="@drawable/ic_star_border"
         android:title="@string/populares" />
 
     <item
@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/navigation_myratings"
-        android:icon="@drawable/ic_star"
+        android:icon="@drawable/ic_star_half"
         android:title="@string/minhasavaliacoes" />
 
 </menu>

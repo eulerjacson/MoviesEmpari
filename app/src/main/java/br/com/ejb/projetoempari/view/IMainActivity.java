@@ -3,7 +3,6 @@ package br.com.ejb.projetoempari.view;
 import java.util.List;
 
 import br.com.ejb.projetoempari.model.entity.Movie;
-import br.com.ejb.projetoempari.model.entity.PopularMovies;
 
 /**
  * Created by Euler on 06/02/2018.

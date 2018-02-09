@@ -51,17 +51,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         moviesPresenter = new MoviesPresenter(this);
         moviesPresenter.loadPopularMovies();
 
-        /*rvMovies.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
-                if (!recyclerView.canScrollVertically(1)) {
-                    Toast.makeText(MainActivity.this,"Last",Toast.LENGTH_LONG).show();
-                }
-            }
-        });*/
-
     }
 
     @Override

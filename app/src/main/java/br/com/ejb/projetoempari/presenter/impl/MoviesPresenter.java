@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import br.com.ejb.projetoempari.R;
 import br.com.ejb.projetoempari.model.api.MoviesAPI;
 import br.com.ejb.projetoempari.model.entity.Movie;
-import br.com.ejb.projetoempari.model.entity.PopularMovies;
+import br.com.ejb.projetoempari.model.entity.JsonMovies;
 import br.com.ejb.projetoempari.model.entity.RateMovie;
 import br.com.ejb.projetoempari.presenter.IMoviesPresenter;
 import br.com.ejb.projetoempari.util.EjbUtil;
@@ -35,19 +35,16 @@ public class MoviesPresenter implements IMoviesPresenter {
         this.mIDetailsActivity = mIDetailsActivity;
     }
 
-    @Override
-    public void loadPopularMovies() {
-        mIMainActivity.openProgress();
-        Call<PopularMovies> request = moviesAPI.getAPI().listPopularMovies();
-
-        request.enqueue(new Callback<PopularMovies>() {
+    @NonNull
+    private Callback<JsonMovies> getListCallback() {
+        return new Callback<JsonMovies>() {
             @Override
-            public void onResponse(@NonNull Call<PopularMovies> call, @NonNull Response<PopularMovies> response) {
+            public void onResponse(@NonNull Call<JsonMovies> call, @NonNull Response<JsonMovies> response) {
                 mIMainActivity.closeProgress();
                 if (response.isSuccessful()) {
-                    PopularMovies popularMovies = response.body();
-                    if (popularMovies != null) {
-                        mIMainActivity.updateTable(popularMovies.getResults());
+                    JsonMovies jsonMovies = response.body();
+                    if (jsonMovies != null) {
+                        mIMainActivity.updateTable(jsonMovies.getResults());
                     }
                 } else {
                     mIMainActivity.showToast(R.string.error_request);
@@ -55,96 +52,39 @@ public class MoviesPresenter implements IMoviesPresenter {
             }
 
             @Override
-            public void onFailure(@NonNull Call<PopularMovies> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<JsonMovies> call, @NonNull Throwable t) {
                 mIMainActivity.closeProgress();
                 mIMainActivity.showToast(R.string.error_request);
             }
-        });
+        };
+    }
 
+    @Override
+    public void loadPopularMovies() {
+        mIMainActivity.openProgress();
+        Call<JsonMovies> request = moviesAPI.getAPI().listPopularMovies();
+        request.enqueue(getListCallback());
     }
 
     @Override
     public void loadTopRatedMovies() {
         mIMainActivity.openProgress();
-        Call<PopularMovies> request = moviesAPI.getAPI().listTopRatedMovies();
-
-        request.enqueue(new Callback<PopularMovies>() {
-            @Override
-            public void onResponse(@NonNull Call<PopularMovies> call, @NonNull Response<PopularMovies> response) {
-                mIMainActivity.closeProgress();
-                if (response.isSuccessful()) {
-                    PopularMovies popularMovies = response.body();
-                    if (popularMovies != null) {
-                        mIMainActivity.updateTable(popularMovies.getResults());
-                    }
-                } else {
-                    mIMainActivity.showToast(R.string.error_request);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<PopularMovies> call, @NonNull Throwable t) {
-                mIMainActivity.closeProgress();
-                mIMainActivity.showToast(R.string.error_request);
-            }
-        });
-
+        Call<JsonMovies> request = moviesAPI.getAPI().listTopRatedMovies();
+        request.enqueue(getListCallback());
     }
 
     @Override
     public void loadUpcomingMovies() {
         mIMainActivity.openProgress();
-        Call<PopularMovies> request = moviesAPI.getAPI().listUpcomingMovies();
-
-        request.enqueue(new Callback<PopularMovies>() {
-            @Override
-            public void onResponse(@NonNull Call<PopularMovies> call, @NonNull Response<PopularMovies> response) {
-                mIMainActivity.closeProgress();
-                if (response.isSuccessful()) {
-                    PopularMovies popularMovies = response.body();
-                    if (popularMovies != null) {
-                        mIMainActivity.updateTable(popularMovies.getResults());
-                    }
-                } else {
-                    mIMainActivity.showToast(R.string.error_request);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<PopularMovies> call, @NonNull Throwable t) {
-                mIMainActivity.closeProgress();
-                mIMainActivity.showToast(R.string.error_request);
-            }
-        });
-
+        Call<JsonMovies> request = moviesAPI.getAPI().listUpcomingMovies();
+        request.enqueue(getListCallback());
     }
 
     @Override
     public void loadGuestRatedMovies() {
         mIMainActivity.openProgress();
-        Call<PopularMovies> request = moviesAPI.getAPI().listGuestRatedMovies(EjbUtil.guestToken);
-
-        request.enqueue(new Callback<PopularMovies>() {
-            @Override
-            public void onResponse(@NonNull Call<PopularMovies> call, @NonNull Response<PopularMovies> response) {
-                mIMainActivity.closeProgress();
-                if (response.isSuccessful()) {
-                    PopularMovies popularMovies = response.body();
-                    if (popularMovies != null) {
-                        mIMainActivity.updateTable(popularMovies.getResults());
-                    }
-                } else {
-                    mIMainActivity.showToast(R.string.error_request);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<PopularMovies> call, @NonNull Throwable t) {
-                mIMainActivity.closeProgress();
-                mIMainActivity.showToast(R.string.error_request);
-            }
-        });
-
+        Call<JsonMovies> request = moviesAPI.getAPI().listGuestRatedMovies(EjbUtil.guestToken);
+        request.enqueue(getListCallback());
     }
 
     @Override
@@ -173,7 +113,6 @@ public class MoviesPresenter implements IMoviesPresenter {
                 mIDetailsActivity.onBack();
             }
         });
-
     }
 
     @Override

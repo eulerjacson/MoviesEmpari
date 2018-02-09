@@ -8,7 +8,7 @@ import br.com.ejb.projetoempari.model.entity.Movie;
  * Created by Euler on 06/02/2018.
  */
 
-public class PopularMovies {
+public class JsonMovies {
     private int page;
     private int total_results;
     private int total_pages;
